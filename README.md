@@ -47,8 +47,8 @@ After that, go to the fields configuration of the widget and set the type of the
 
 Now, go to the user control and select the report generation analysis you created before to the field *Run analysis when submitting form*. You can also customize the text of the submit button and other options on the widget. But you only need what is written on this tutorial to get the report generations working. Check the following example using our report system in action!
 
-#### Generating report
-========================================== GIF =============================================
+#### Generating report demonstration
+![Generating report](Media/demonstration.gif)
 
 #### Email received with link for the report
 ![Email Received with link for the report](Media/emailexample.png)
