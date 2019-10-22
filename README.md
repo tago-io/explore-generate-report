@@ -37,17 +37,13 @@ const data = await device.find({ variable: ['tension', 'electric_current', 'capa
 That's all you have to change on the code, but, there are some other lines you can change on the script to use the report as you want. You can **customize the email** that is sent for the user by change what is written on the lines 30 to 35. You can also **customize the validation** or **customize the notification** sent to the user in the same script, just take a look on the code and you should find all you want to customize. After that, let's create the widget for our report generation system.
 
 ### Creating the input form widget to generate reports
-This is, by far, the easiest part of the tutorial. We are going to create a widget that will have an input for the user insert his email and after the email is inserted the user will click on the button "Generate Report" to receive the link for the report on his email and also a validation on the widget giving the feedback for the user.
+This is, by far, the easiest part of the tutorial. We are going to create a widget that will have an input for the user insert his email and after the email is inserted the user will click on the button "Generate Report" to receive the link for the report on his email and also a validation on the widget giving the feedback for the user. For create this just select the dashboard you want to have a report generation system and create a input form. On the input form you should use two variables named *email* and *validation*. Like the following image:
 
-======================================== GIF HERE =========================================
-
-For create this just select the dashboard you want to have a report generation system and create a input form. On the input form you should use two variables named *email* and *validation*. Like the following image:
-
-========================================= IMAGE HERE ==================================
+![Widget variables](Media/widget_variables.png)
 
 After that, go to the fields configuration of the widget and set the type of the *email* as **Text** and the type of the *validation* as **Validation**. Like the image:
 
-========================================= IMAGE HERE ==================================
+![Fields Configuration](Media/field_configurations.png)
 
 Now, go to the user control and select the report generation analysis you created before to the field *Run analysis when submitting form*. You can also customize the text of the submit button and other options on the widget. But you only need what is written on this tutorial to get the report generations working.
 
