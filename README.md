@@ -22,17 +22,17 @@ The reports can be generated on TagoIO platform by just using a script for an an
 After you have the environment variables set up, let's go for the code.
 
 #### Code implementation
-The script **generateReports.js** is already operational and it's just a matter of ***what variables it should report***. So, remember on the beginning of this tutorial, you were asked to have in mind what variables you want to have on your report. This is the time you are going to use the variables you selected. For this tutorial I will choose the following variables: *temperature* and *humidity*. Go to the script you have paste on your report generation analysis and search for the line 23. The line 23 should have something like that:
+The script **generateReports.js** is already operational and it's just a matter of ***what variables it should report***. So, remember on the beginning of this tutorial, you were asked to have in mind what variables you want to have on your report. This is the time you are going to use the variables you selected. For this tutorial I will choose the following variables: `temperature` and `humidity`. Go to the script you have paste on your report generation analysis and search for the line 23. The line 23 should have something like that:
 ```javascript
 const data = await device.find({ variable: ['temperature', 'humidity'], start_date: '10 year', qty: 9999 });
 ```
 
-That is the line we want to change, you can see there is an array on the key named *variable*. You just need to insert the variables you want to report inside this array. For example, you want the variable *battery*. Your line should be like the following:
+That is the line we want to change, you can see there is an array on the key named *variable*. You just need to insert the variables you want to report inside this array. For example, you want the variable `battery`. Your line should be like the following:
 ```javascript
 const data = await device.find({ variable: ['battery'], start_date: '10 year', qty: 9999 });
 ```
 
-Other example, you want the variables *tension*, *electric_current* and *capacitance*, so your line should be like the following:
+Other example, you want the variables `tension`, `electric_current` and `capacitance`, so your line should be like the following:
 ```javascript
 const data = await device.find({ variable: ['tension', 'electric_current', 'capacitance'], start_date: '10 year', qty: 9999 });
 ```
