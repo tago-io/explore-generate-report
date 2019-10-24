@@ -4,7 +4,10 @@ Easily generate reports on TagoIO platform using input form and analysis. What y
 - How you can use reports to increase value for your application
 
 ## What do I need for generate a CSV report?
-Currently, there are several applications that needs to be reported for external reasons from TagoIO. There are some ways for generate reports, but today we are going to learn how to generate CSV reports. For this task, the developer needs to already have a running application (device already setup, data on device's bucket) and need to have planned **what variables want to report**. Without having in mind what variables will be reported or having an application for report there isn't how to implement this tutorial, so it's important that the developer set this prerequisites before proceed.
+Currently, there are several applications that needs to be reported for external reasons from TagoIO. There are some ways for generate reports, but today we are going to learn how to generate CSV reports. For this task, the developer needs to already have a running application (device already setup, data on device's bucket) and need to have planned **what variables want to report**. Without having in mind what variables will be reported or having an application for report there isn't how to implement this tutorial, so it's important that the developer set this prerequisites before proceed. You also need to know some concepts like:
+
+- How to create an analysis: https://tago.elevio.help/en/articles/120
+- Environment Variables: https://tago.elevio.help/en/articles/65
 
 ## How to generate reports using input form and analysis
 The reports can be generated on TagoIO platform by just using a script for an analysis and a widget (we will use the Input Form widget but you can use others for that) to run the analysis when. Now, let's go for the implementation!
