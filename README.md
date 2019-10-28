@@ -13,7 +13,11 @@ Currently, there are several applications that needs to be reported for external
 The reports can be generated on TagoIO platform by just using a script for an analysis and a widget (we will use the Input Form widget but you can use others for that) to run the analysis when. Now, let's go for the implementation!
 
 ### Creating the analysis used on reports generation
-The reports can be generated on TagoIO platform by just using a script for an analysis. The script can be found here on Github and is named **generateReports.js**. Copy the code from the file here on Github and paste it on a new analysis within your TagoIO account. After that, set the following environment variables: *device_token*, *dashboard_id* and *account_token*. If you aren't sure what values should you use on each of the variables, check the topics bellow, there are aditional explanations for each of them.
+The reports can be generated on TagoIO platform by just using a script for an analysis. The script can be found here on Github and is named **generateReports.js**. You can check the following image if you are having trouble to find the script:
+
+![Script Location](Media/codeLocation.jpg)
+
+Copy the code from the file here on Github and paste it on a new analysis within your TagoIO account. After that, set the following environment variables: *device_token*, *dashboard_id* and *account_token*. If you aren't sure what values should you use on each of the variables, check the topics bellow, there are aditional explanations for each of them.
 
 - Device Token: it's a token generated from the device you are using to work with the data you want to get on your report.
 - Dashboard ID: you need to get the ID of the dashboard you will use to implement this report system.
