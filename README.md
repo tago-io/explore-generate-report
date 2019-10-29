@@ -23,7 +23,11 @@ Copy the code from the file here on Github and paste it on a new analysis within
 - Dashboard ID: you need to get the ID of the dashboard you will use to implement this report system.
 - Account Token: token generated from the account you are using.
 
-After you have the environment variables set up, let's go for the code.
+After you have inserted all the environment variables, you should have your environment variables tab like the following image:
+
+![Environment Variables](Media/environmentVar.jpg)
+
+Now, let's go for the code!
 
 #### Code implementation
 The script **generateReports.js** is already operational and it's just a matter of ***what variables it should report***. So, remember on the beginning of this tutorial, you were asked to have in mind what variables you want to have on your report. This is the time you are going to use the variables you selected. For this tutorial I will choose the following variables: `temperature` and `humidity`. Go to the script you have paste on your report generation analysis and search for the line 23. The line 23 should have something like that:
