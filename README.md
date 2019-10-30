@@ -15,7 +15,7 @@ The reports can be generated on TagoIO platform by just using a script for an an
 ### Creating the analysis used on reports generation
 The reports can be generated on TagoIO platform by just using a script for an analysis. The script can be found here on Github and is named **generateReports.js**. You can check the following image if you are having trouble to find the script:
 
-![Script Location](Media/codeLocation.jpg)
+[![](Media/codeLocation.jpg)](#)
 
 Copy the code from the file here on Github and paste it on a new analysis within your TagoIO account. After that, set the following environment variables: *device_token*, *dashboard_id* and *account_token*. If you aren't sure what values should you use on each of the variables, check the topics bellow, there are aditional explanations for each of them.
 
@@ -25,7 +25,7 @@ Copy the code from the file here on Github and paste it on a new analysis within
 
 After you have inserted all the environment variables, you should have your environment variables tab like the following image:
 
-![Environment Variables](Media/environmentVar.jpg)
+[![](Media/environmentVar.jpg)](#)
 
 Now, let's go for the code!
 
@@ -57,24 +57,23 @@ This is, by far, the easiest part of the tutorial. We have only four steps to fo
 
 We are going to create a widget that will have an input for the user insert his email and after the email is inserted the user will click on the button "Generate Report" to receive the link for the report on his email and also a validation on the widget giving the feedback for the user. For create this just select the dashboard you want to have a report generation system and create a input form. On the input form you should use two variables named *email* and *validation*. Like the following image:
 
-![Widget variables](Media/widget_variables.png)
+[![](Media/widget_variables.png)](#)
 
 After that, go to the fields configuration of the widget and set the type of the *email* as **Text** and the type of the *validation* as **Validation**. Like the image:
 
-![Fields Configuration](Media/field_configurations.png)
+[![](Media/field_configurations.png)](#)
 
 Now, go to the user control and select the report generation analysis you created before to the field *Run analysis when submitting form*. Like the image bellow:
 
-![Run analysis when submitting form](Media/runAnalysis.jpg)
+[![](Media/runAnalysis.jpg)](#)
 
 You can also customize the text of the submit button and other options on the widget. But you only need what is written on this tutorial to get the report generations working. Check the following example using our report system in action!
 
 #### Generating report demonstration
-![Generating report](Media/demonstration.gif)
+[![](Media/demonstration.gif)](#)
 
 #### Email received with link for the report
-![Email Received with link for the report](Media/emailexample.png)
-
+[![](Media/emailexample.png)](#)
 
 ## Simple like that!
 The reports generation is just it! Try to use it and check the report you will receive on your email. You can customize, make improvements and everything else with the script and widget. If you had any troubles during the tutorial, get in touch with our team and we will be happy to help you :)
