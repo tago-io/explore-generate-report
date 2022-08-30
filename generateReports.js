@@ -1,94 +1,76 @@
-const TagoAnalysis = require('tago/analysis');
-const TagoDevice = require('tago/device');
-const TagoUtils = require('tago/utils');
-const TagoAccount = require('tago/account');
-const TagoServices = require('tago/services');
-const co = require('co');
+const { Account, Analysis, Device, Services, Utils } = require("@tago-io/sdk");
 
 function validation(validation_var, device) {
   return function _(message, type) {
-    if (!message || !type) throw 'Missing message or type';
-    device.insert({
-      variable: validation_var,
-      value: message,
-      metadata: {
-        type,
-      },
-    }).then(console.log);
+    if (!message || !type) {
+      throw "Missing message or type";
+    }
+    device
+      .sendData({
+        variable: validation_var,
+        value: message,
+        metadata: {
+          type,
+        },
+      })
+      .then(console.log);
   };
 }
 
 async function sendReport(context, scope, account, device, email) {
-  const account_info = await account.info();
-  const data = await device.find({ variable: ['temperature', 'humidity'], start_date: '10 year', qty: 9999 });
-  let csv = 'variable,value,unit,time';
+  const data = await device.getData({ variable: ["temperature", "humidity"], start_date: "10 year", qty: 9999 });
+  let csv = "variable,value,unit,time";
 
   data.forEach((x) => {
     csv = `${csv}\n${x.variable},${x.value},${x.unit},${x.time}`;
   });
-  const emailService = new TagoServices(context.token).email;
-  const from = 'reports@tago.io';
-  const subject = 'Tago report';
+  const emailService = new Services({ token: context.token }).email;
+  const from = "reports@tago.io";
+  const subject = "Tago report";
   const message = `Hi, this is an example of a report.`;
   const attachment = {
     archive: csv,
-    filename: 'report.csv',
+    filename: "report.csv",
   };
-  await emailService.send(email.value, subject, message, from, attachment);
+  //   { to: "client(at)company.com", subject: "Reports", message: "Hello client, it's your report" }
+  console.log(email);
+  await emailService.send({ to: email.value, from, subject, attachment, message });
 }
 
 async function explore(context, scope) {
-  if (!scope[0]) return context.log('no scope');
-  const env_var = TagoUtils.env_to_obj(context.environment);
-  if (!env_var.account_token) return context.log('Can\'t find variable account_token on environment variables');
-  if (!env_var.device_token) return context.log('Can\'t find variable account_token on environment variables');
-  if (!env_var.dashboard_id) return context.log('Can\'t find variable dashboard_id on environment variables');
-
-  const tago_acc = new TagoAccount(env_var.account_token);
-  const tago_device = new TagoDevice(env_var.device_token);
-  const Notification = new TagoServices(context.token).Notification;
-
-  const customer_email = scope.find(x => x.variable === 'email');
-  if (customer_email) {
-    const token = await TagoUtils.getTokenByName(tago_acc, customer_email.origin, ['Default', 'Generic', 'Token #1', 'Token #2']);
-    const device_data = new TagoDevice(token);
-    const validate = validation('validation', device_data);
-    validate('Generating report, please wait a moment...', 'success');
-    await sendReport(context, scope, tago_acc, tago_device, customer_email);
-    validate('Report successfully generated, please check your email.', 'success');
-    return;
+  if (!scope[0]) {
+    return context.log("no scope");
+  }
+  const env_var = Utils.envToJson(context.environment);
+  if (!env_var.account_token) {
+    return context.log("Can't find variable account_token on environment variables");
+  }
+  if (!env_var.device_token) {
+    return context.log("Can't find variable device_token on environment variables");
+  }
+  if (!env_var.dashboard_id) {
+    return context.log("Can't find variable dashboard_id on environment variables");
   }
 
-  const customer = scope[0];
-  let title;
-  let message;
-  const ref_id = customer.user_id;
+  const tago_acc = new Account({ token: env_var.account_token });
+  const tago_device = new Device({ token: env_var.device_token });
 
-  if (customer.user_cmd === 'install_application') {
-    const share = await tago_acc.explore.shareDashboard(customer.user_id, env_var.dashboard_id).catch(() => {
-      title = 'Fail';
-      message = '"Generate Report" application had a problem during the installation';
-    });
-
-    if (!share) {
-      title = 'Fail';
-      message = '"Generate Report" application had a problem during the installation';
-    } else {
-      title = 'Success';
-      message = '"Generate Report" application has been installed with success!';
-    }
-
-    await Notification.send(title, message, ref_id).then(context.log);
-
-    if (title === 'Fail') {
-      const customer_acc = new TagoAccount(customer.user_token.token);
-      await customer_acc.explore.uninstallApplication(customer.user_id).then(context.log);
-    }
-  } else {
-    title = 'Success';
-    message = '"Generate Report" application has been uninstalled with success!';
-    await Notification.send(title, message, ref_id).then(context.log);
+  const customer_email = scope.find((x) => x.variable === "email");
+  console.log(customer_email);
+  if (customer_email) {
+    const token = await Utils.getTokenByName(tago_acc, customer_email.device);
+    const device_data = new Device({ token: token });
+    const validate = validation("validation", device_data);
+    validate("Generating report, please wait a moment...", "success");
+    await sendReport(context, scope, tago_acc, tago_device, customer_email);
+    validate("Report successfully generated, please check your email.", "success");
+    return;
+  } else{
+    return validate("No email address provided.", "danger");
   }
 }
 
-module.exports = new TagoAnalysis(explore, 'ANALYSIS TOKEN HERE IF YOU WANT TO RUN EXTERNAL');
+module.exports = new Analysis(explore);
+
+// To run analysis on your machine (external)
+// module.exports = new Analysis(explore, { token: "8142d7d6-310c-4512-b86b-8fba9adc319a" });
