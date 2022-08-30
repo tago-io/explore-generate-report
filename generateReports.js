@@ -18,7 +18,7 @@ function validation(validation_var, device) {
 }
 
 async function sendReport(context, scope, account, device, email) {
-  const data = await device.getData({ variable: ["temperature", "humidity"], start_date: "10 year", qty: 9999 });
+  const data = await device.getData({ variable: ["temperature", "humidity"], qty: 9999 });
   let csv = "variable,value,unit,time";
 
   data.forEach((x) => {
